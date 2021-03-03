@@ -330,7 +330,7 @@ def tests(session, iris):
     if COVERAGE:
         # Execute the tests with code coverage.
         session.conda_install("--channel=conda-forge", *COVERAGE.split())
-        session.run("pytest", "--cov-report=xml", "--cov")
+        session.run("pytest", "--cov")
         session.run("codecov")
     else:
         # Execute the tests.

@@ -21,4 +21,5 @@ dependencies:
   - filelock
   - pep8
   - requests
-  - nose
+  - pytest
+  - pytest-cov

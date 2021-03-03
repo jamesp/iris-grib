@@ -15,6 +15,8 @@ develop-eggs
 
 # test
 .nox/
+.coverage
+coverage.xml
 
 # Installer logs
 pip-log.txt

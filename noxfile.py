@@ -31,6 +31,8 @@ IRIS_SOURCE = os.environ.get("IRIS_SOURCE", ['source', 'conda-forge'])
 #: Default cartopy cache directory.
 CARTOPY_CACHE_DIR = os.environ.get("HOME") / Path(".local/share/cartopy")
 
+#: Cirrus-CI environment variable hook.
+COVERAGE = os.environ.get("COVERAGE", False)
 
 def venv_cached(session, requirements_file=None):
     """
@@ -325,14 +327,14 @@ def tests(session, iris):
 
     session.run("python", "-m", "eccodes", "selfcheck")
 
-    session.run(
-        "python",
-        "-m",
-        "iris_grib.tests.runner",
-        "--default-tests",
-        "--unit-tests",
-        "--integration-tests",
-    )
+    if COVERAGE:
+        # Execute the tests with code coverage.
+        session.conda_install("--channel=conda-forge", *COVERAGE.split())
+        session.run("pytest", "--cov-report=xml", "--cov")
+        session.run("codecov")
+    else:
+        # Execute the tests.
+        session.run("pytest")
 
 
 

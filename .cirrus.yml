@@ -30,6 +30,8 @@ env:
   IRIS_TEST_DATA_DIR: ${HOME}/iris-test-data
   # Git commit hash for iris test data.
   IRIS_TEST_DATA_REF: "2.0.0"
+  # testing fix for conda error on string "5.4.89"
+  CONDA_OVERRIDE_LINUX: "5.4.89" 
 
 #
 # Linting
